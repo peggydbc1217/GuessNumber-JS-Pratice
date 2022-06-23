@@ -1,58 +1,62 @@
 'use strict';
 
-// console.log(document.querySelector('.message').textContent);
-
-// document.querySelector('.message').textContent = '👏Correct Number !';
-
-// document.querySelector('.number').textContent = 13;
-
-// document.querySelector('.score').textContent = 20;
-
-// document.querySelector('.guess').value = 15;
-
 let screctNumber = Math.trunc(Math.random() * 20) + 1;
 let score = 20;
 let highScore = 0;
 
-const message = document.querySelector('.message');
-const number = document.querySelector('.number');
-const showScore = document.querySelector('.score');
-const showGuess = document.querySelector('.guess');
-const showHighScore = document.querySelector('.highscore');
+const displayMessage = function (message) {
+  document.querySelector('.message').textContent = message;
+};
+
+const displayNumber = function (number) {
+  document.querySelector('.number').textContent = number;
+};
+
+const displayScore = function (showScore) {
+  document.querySelector('.score').textContent = showScore;
+};
+
+const displayGuessNumber = function (showGuessNumber) {
+  document.querySelector('.guess').value = showGuessNumber;
+};
+
+const displayHighScore = function (showHighScore) {
+  document.querySelector('.highscore').textContent = showHighScore;
+};
 
 function guessNumber() {
   const guess = Number(document.querySelector('.guess').value);
 
   if (!guess) {
-    message.textContent = '❌No Number';
+    displayMessage('❌No Number');
   } else if (guess === screctNumber) {
-    message.textContent = '🎉🎉Correct Number!';
+    displayMessage('🎉🎉Correct Number!');
     document.body.style.backgroundColor = '#60b347';
-    number.style.width = '30rem';
-    number.textContent = guess;
+    document.querySelector('.number').style.width = '30rem';
+    displayNumber(guess);
     highScore = score;
-    showHighScore.textContent = highScore;
+    displayMessage(highScore);
   } else if (guess !== screctNumber) {
     if (score > 1) {
-      message.textContent = guess > screctNumber ? '📈Too high!' : '📉Too low!';
+      displayMessage(guess > screctNumber ? '📈Too high!' : '📉Too low!');
       score -= 1;
-      showScore.textContent = score;
+      displayScore(score);
     } else {
-      message.textContent = 'You lost the game!';
-      showScore.textContent = score;
+      displayMessage('You lost the game!');
+      displayScore(score);
     }
   }
 }
 
 function playAgain() {
   document.body.style.backgroundColor = '#222';
-  number.style.width = '15rem';
-  number.textContent = '?';
+  document.querySelector('.number').style.width = '15rem';
+  displayNumber('?');
   score = 20;
-  showScore.textContent = 20;
-  message.textContent = 'Start guessing...';
-  showGuess.value = '';
-  showHighScore.textContent = 0;
+  displayScore(20);
+  displayMessage('Start guessing...');
+  displayGuessNumber('');
+  displayHighScore(0);
   highScore = 0;
   screctNumber = Math.trunc(Math.random() * 20) + 1;
 }
