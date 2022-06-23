@@ -32,24 +32,13 @@ function guessNumber() {
     number.textContent = guess;
     highScore = score;
     showHighScore.textContent = highScore;
-  } else if (guess > screctNumber) {
+  } else if (guess !== screctNumber) {
     if (score > 1) {
-      message.textContent = '📈Too high!';
+      message.textContent = guess > screctNumber ? '📈Too high!' : '📉Too low!';
       score -= 1;
       showScore.textContent = score;
     } else {
       message.textContent = 'You lost the game!';
-      score = 0;
-      showScore.textContent = score;
-    }
-  } else if (guess < screctNumber) {
-    if (score > 1) {
-      message.textContent = '📉Too low!';
-      score -= 1;
-      showScore.textContent = score;
-    } else {
-      message.textContent = 'You lost the game!';
-      score = 0;
       showScore.textContent = score;
     }
   }
